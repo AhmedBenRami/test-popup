@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <button onclick="openWin()">Open</button>
+        <button onclick="change()">Change</button>
+        <button onclick="closeWin()">Close</button>
+        <button onclick="resizeWin()">resize</button>
+        <script>
+            let windows = [];
+            let bg_colors = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+            function openWin() {
+                let new_window = window.open("", "", `width=400, height=400, left=${1368 / 2}`);
+                windows.push(new_window);
+            }
+
+            function change() {
+                let color = "";
+                for (let i = 0; i < 6; i++) {
+                    color += bg_colors[parseInt(Math.random() * bg_colors.length)];
+                }
+                windows[windows.length - 1].document.body.style.backgroundColor = "#" + color;
+            }
+            function closeWin() {
+                windows[windows.length - 1].close();
+                windows.pop(windows[windows.length - 1]);
+            }
+            function resizeWin() {
+                let interval = setInterval(() => {
+                    windows[windows.length - 1].resizeBy(5, 5);
+                }, 5);
+                setTimeout(() => { clearInterval(interval) }, 300);
+            }
+        </script>
+</body>
+</html>
